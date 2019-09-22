@@ -55,3 +55,16 @@ function delete($user_id)
        </ul>
    </div><br />
    @endif
+   
+   
+   
+  //git solution
+  
+  	$ cd ~/.ssh
+	$ ls
+   	$ ssh-keygen -o
+	//optional
+	$ cat ~/.ssh/id_rsa.pub
+   
+   
+   
