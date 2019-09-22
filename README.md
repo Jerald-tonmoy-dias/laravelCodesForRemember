@@ -26,3 +26,11 @@ function delete($user_id)
       User::findOrFail($user_id)->delete();
       return back();
     }
+    
+//restore
+    
+    function restore_banner($banner_id)
+      {
+      User::onlyTrashed()->where('id',$user_id)->restore();
+      return back();
+    }
