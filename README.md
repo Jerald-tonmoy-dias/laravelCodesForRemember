@@ -58,6 +58,17 @@ function delete($user_id)
    
    
    
+   // relationship
+   
+   function relationbetweencategory()
+    {
+      return $this->hasOne('App\Category','id','category_id');
+                        // Category - id , product-category_id
+    }
+   
+   
+   
+   
   //git solution
   
   	$ cd ~/.ssh
