@@ -68,6 +68,19 @@ function delete($user_id)
    
    
    
+   // photo upload
+   
+   if ($request->hasFile('header_banner')) {
+        $photo_upload     =  $request ->header_banner;
+        $photo_extension  =  $photo_upload -> getClientOriginalExtension();
+        $photo_name       =  $last_inserted_id . "." . $photo_extension;
+        Image::make($photo_upload)->resize(1600,800)->save(base_path('public/uploads/banner/'.$photo_name),100);
+        Banner::find($last_inserted_id)->update([
+        'header_banner'          => $photo_name,
+      ]);
+      }
+   
+   
    
   //git solution
   
