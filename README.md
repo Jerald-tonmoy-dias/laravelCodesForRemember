@@ -79,6 +79,36 @@ function delete($user_id)
         'header_banner'          => $photo_name,
       ]);
       }
+
+
+ // Photo Update
+ 
+   if($request->hasFile('header_banner')){
+        if(Banner::find($request->banner_id)->header_banner=='default.png'){
+          $photo_upload     = $request->header_banner;
+          $photo_extension  =  $photo_upload->getClientOriginalExtension();
+          $photo_name       =  $request->header_banner . "." . $photo_extension;
+          Image::make($photo_upload)->resize(1600,800)->save(base_path('public/uploads/banner/'.$photo_name),100);
+          Banner::find($request->banner_id)->update([
+          'header_banner'          => $photo_name,
+        ]);
+        }
+        else {
+          //delete
+          $delete_photo=Banner::find($request->banner_id)->header_banner;
+          unlink(base_path('public/uploads/banner/'.$delete_photo));
+          //update
+          $photo_upload     = $request->header_banner;
+          $photo_extension  =  $photo_upload->getClientOriginalExtension();
+          $photo_name       =  $request->banner_id . "." . $photo_extension;
+          Image::make($photo_upload)->resize(1600,800)->save(base_path('public/uploads/banner/'.$photo_name),100);
+          Banner::find($request->banner_id)->update([
+          'header_banner'          => $photo_name,
+        ]);
+        }
+      }
+      
+
    
    
    
