@@ -149,7 +149,24 @@
 
 
 
+	//Mailing
+	
+	public $name ="";
+	public function __construct($name)
+	{
+	  $this->name=$name;
+	}
 
+	/**
+	* Build the message.
+	*
+	* @return $this
+	*/
+	public function build()
+	{
+	  $name ="";
+	  return $this->view('dashboard.trainee_registration.mail.index',compact('name'));
+	}
 
 
 
