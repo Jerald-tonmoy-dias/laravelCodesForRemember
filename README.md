@@ -1,5 +1,20 @@
 # laravelCodesForRemember
 
+//.htaccess
+	
+	<IfModule mod_rewrite.c>
+	  RewriteEngine on
+	  RewriteCond %{REQUEST_FILENAME} !-f
+	  RewriteRule ^(.*)$ public/$1 [L]
+	</IfModule>
+
+	# php -- BEGIN cPanel-generated handler, do not edit
+	# Set the “ea-php72” package as the default “PHP” programming language.
+	<IfModule mime_module>
+	  AddHandler application/x-httpd-ea-php72 .php .php7 .phtml
+	</IfModule>
+	# php -- END cPanel-generated handler, do not edit
+
 // Edit
 
 	function edit($user_id)
