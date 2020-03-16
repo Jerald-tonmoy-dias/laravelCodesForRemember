@@ -185,6 +185,11 @@
 
 
 
+	//photo download
+	
+	$file_name = Requisition::findOrFail($requisition_id)->money_receipt;
+	$path = public_path('uploads/requisition/'.$file_name);
+	return response()->download($path);
    
    
    
