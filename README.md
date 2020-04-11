@@ -164,7 +164,7 @@
 
 
 
-	//Mailing
+//Mailing
 	
 	public $name ="";
 	public function __construct($name)
@@ -185,11 +185,73 @@
 
 
 
-	//photo download
+//photo download
 	
 	$file_name = Requisition::findOrFail($requisition_id)->money_receipt;
 	$path = public_path('uploads/requisition/'.$file_name);
 	return response()->download($path);
+	
+// Get Youtube Video JSON Informarion
+	
+	 $youtube_contains = Str::contains($request->video_url, 'youtu.be');
+	 $vid = Str::after($request->video_url,'https://youtu.be/'); //youtube video id
+
+          // YOUTUBE_V3_API Keys
+          $api = env('YOUTUBE_V3_API');
+
+          // Getting video information from youtbe video api
+            $videoDetails = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=" . $vid . "&part=contentDetails,statistics&key=" . $api);
+
+            // json_decoding
+            $VidDuration = json_decode($videoDetails, true);
+
+            foreach ($VidDuration['items'] as $vidTime)
+            {
+              $VidDuration= $vidTime['contentDetails']['duration'];
+            }
+
+            if (strlen($VidDuration) <= 5) {
+              $pattern='/PT(\d+)S/';
+              preg_match($pattern,$VidDuration,$matches);
+              $seconds=$matches[1];
+              $content->duration = $seconds;
+            }elseif (strlen($VidDuration) <= 8) {
+              $pattern='/PT(\d+)M(\d+)S/';
+              preg_match($pattern,$VidDuration,$matches);
+              $seconds=$matches[1]*60+$matches[2];
+              $content->duration = $seconds;
+            }else {
+              $pattern='/PT(\d+)H(\d+)M(\d+)S/';
+              preg_match($pattern,$VidDuration,$matches);
+              $seconds=$matches[1]*3600+$matches[2]*60+$matches[3];
+              $content->duration = $seconds;
+            }
+
+            $content->save();
+            notify()->success(translate('Class Content Save Successfully '));
+            return back();
+	    
+// GET vimeo video information JSON
+	     
+	     $vimeo_contains = Str::contains($request->video_url, 'vimeo.com');
+	     
+	     $vid = $request->video_url; //Vimeo video url
+
+            // Getting video information from vimeo video api
+            $videoDetails = file_get_contents("https://vimeo.com/api/oembed.json?url=" . $vid);
+
+            // json_decoding
+            $VidDuration = json_decode($videoDetails, true);
+
+            $duration = $VidDuration['duration'];
+
+            $content->duration = $duration;
+
+            $content->save();
+            notify()->success(translate('Class Content Save Successfully '));
+            return back();
+
+
    
    
    
