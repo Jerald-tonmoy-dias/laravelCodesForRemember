@@ -182,8 +182,18 @@
 	  $name ="";
 	  return $this->view('dashboard.trainee_registration.mail.index',compact('name'));
 	}
-
-
+	
+	
+	
+//photo upload [object]
+  		
+	if($file = $request->hasFile('photo')) {
+            $file = $request->file('photo') ;
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/uploads/profile' ;
+            $file->move($destinationPath,$fileName);
+            $user->photo = $fileName ;
+          }
 
 //photo download
 	
