@@ -272,6 +272,19 @@
    	$ ssh-keygen -o
 	//optional
 	$ cat ~/.ssh/id_rsa.pub
+	
+ //breadcrumb
+ 
+ 	<ul class="breadcrumb__list">
+           <li class="active__list-item">Home</li>
+               @foreach($segments = request()->segments() as $index=>$segment)
+                   <li class="active__list-item">
+                      <a href="{{url(implode(array_slice($segments,0,$index+1),'/'))}}">
+                          {{Str::title($segment)}}
+                       </a>
+                    </li>
+                @endforeach
+         </ul>
    
    
    
