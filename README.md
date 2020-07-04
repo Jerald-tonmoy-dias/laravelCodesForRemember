@@ -260,11 +260,7 @@
             $content->save();
             notify()->success(translate('Class Content Save Successfully '));
             return back();
-
-
-   
-   
-   
+	    
   //git solution
   
   	$ cd ~/.ssh
@@ -286,5 +282,43 @@
                 @endforeach
          </ul>
    
-   
+   //Publish checkbox(ajax)
+   	
+	//blade
+	<input id="radio{{$food->id}}" data-id="{{ $food->id }}" data-url="{{ route('food.publish') }}" class="publish" type="checkbox" {{ $food->is_published == 1 ? 'checked' : '' }}><span class="switch-state bg-primary"></span>
+	
+	//script
+	$('.publish').on('change',function(){
+          var url = this.dataset.url;
+          var id = this.dataset.id;
+
+          if (url != null && id != null) {
+            $.ajax({
+                url: url,
+                data: {id: id},
+                method: 'get',
+                success: function (result) {
+                    alert();
+                },
+            });
+        }
+        });
+	
+	//route
+	Route::get('/foods/publish','Backend\FoodController@food_publish')->name('food.publish');
+	
+	//controller
+	public function food_publish(Request $request)
+       {
+	       $foody = Food::where('id', $request->id)->first();
+	       if ($foody->is_published == 0) {
+		 $foody->is_published = 1;
+		 $foody->save();
+	       }else {
+		 $foody->is_published = 0;
+		 $foody->save();
+	       }
+         return response(['message' => 'Slider status is changed '], 200);
+       }
+	
    
