@@ -321,4 +321,21 @@
          return response(['message' => 'Slider status is changed '], 200);
        }
 	
-   
+   //forModal(JS)
+   	
+	//blade
+	<a href="#!" onclick="quickView('{{ route('quick.view',$product->slug) }}')">
+	
+	//JS
+	//show the modal in this function
+	function quickView(url) {
+	    $('#product-quickview').modal('show');
+	    $('#product-quickview').load(url);
+	}
+	
+	//controller
+	public function quick_view($slug)
+	{
+	   return view('frontend.include.product.quickview');
+	}
+
