@@ -339,3 +339,18 @@
 	   return view('frontend.include.product.quickview');
 	}
 
+//Store Multiple value(json)
+	
+	//controller
+	$data = explode(',', $request->tags);
+            $pro_value = array();
+            foreach ($data as $item) {
+                array_push($pro_value, Str::upper($item));
+            }
+
+            $tags = json_encode($pro_value);
+            $pro->tags = $tags;
+	    
+	//Blade
+	@foreach(json_decode($product->tags) as $data){{$data}},@endforeach
+	
