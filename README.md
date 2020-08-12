@@ -364,4 +364,50 @@
 	    
 	//Blade
 	@foreach(json_decode($product->tags) as $data){{$data}},@endforeach
+
+// Search by Array
+	
+	public function find_order(Request $request)
+    	{
+        $getDatas = null;
+        $condition = array();
+        if (!is_null($request->email)) {
+            $condition = array_merge($condition, ['email' => $request->email]);
+        }
+        if (!is_null($request->booking_code)) {
+            $condition = array_merge($condition, ['booking_code' => $request->booking_code]);
+        }
+        if (!is_null($request->order_number)) {
+            $condition = array_merge($condition, ['order_number' => $request->order_number]);
+        }
+
+        if (!is_null($request->phone)) {
+            $condition = array_merge($condition, ['phone' => $request->phone]);
+        }
+
+
+        if (!is_null($request->end_date)) {
+            $start = null;
+            $end = Carbon::parse($request->end_date)
+                ->endOfDay()
+                ->toDateTimeString();
+            if ($request->has('start_date')) {
+                $start = Carbon::parse($request->start_date)
+                    ->startOfDay()
+                    ->toDateTimeString();
+            } else {
+                $start = Carbon::yesterday()->startOfDay()->toDateTimeString();
+            }
+
+            if (empty($condition)) {
+                $getDatas = OrderProduct::whereBetween('created_at', [$start, $end])->get();
+            } else {
+                $getDatas = OrderProduct::where($condition)->whereBetween('created_at', [$start, $end])->get();
+            }
+
+            }else{
+            $getDatas = OrderProduct::where($condition)->get();
+            }
+            return view('backend.orders.search_result', compact('getDatas'));
+    	}
 	
