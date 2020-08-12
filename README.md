@@ -411,3 +411,18 @@
             return view('backend.orders.search_result', compact('getDatas'));
     	}
 	
+// Product Rating Math
+
+	    $rates = App\Models\OrderProduct::where('shop_id',$id)->select('review_star')->get()->toArray();
+
+           $rateArray =[];
+           foreach ($rates as $rate)
+           {
+               $rateArray[]= $rate['review_star'];
+           }
+
+            $sum = array_sum($rateArray);
+
+            $result = $sum/count($rateArray);
+
+            return response()->json(['rating'=>$result],200);
