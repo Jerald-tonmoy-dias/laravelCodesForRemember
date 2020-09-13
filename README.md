@@ -426,3 +426,28 @@
             $result = $sum/count($rateArray);
 
             return response()->json(['rating'=>$result],200);
+
+// Limit
+				
+	    @php
+                $category_child_limit = 0;
+            @endphp
+
+            @foreach($home_category->childrenCategories as $parent_Cat)
+                @foreach($parent_Cat->childrenCategories as $sub_cat)
+
+                  <input type="hidden" value="{{ $category_child_limit++ }}">
+                     <li>
+                        <a href="{{ route('category.shop',$sub_cat->slug) }}">{{ $sub_cat->name }}</a>
+                     </li>
+			
+		@if ($category_child_limit == 13)
+                     @break
+                @endif
+             @endforeach
+
+              @if ($category_child_limit == 13)
+                 @break
+              @endif
+
+             @endforeach
