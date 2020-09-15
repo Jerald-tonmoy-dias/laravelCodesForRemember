@@ -451,3 +451,33 @@
               @endif
 
              @endforeach
+	     
+//Check Exist
+	
+	$check_exist = Variant::where('unit',$request->unit)
+                              ->where('variant',$request->variant)
+                              ->where('code',$request->code)
+                              ->exists();
+        
+
+        if (isset($check_exist)) {
+          Alert::success('Exist','This variation is exist');
+          return back();
+        }else {
+            $requset_variant = new Variant();
+            $requset_variant->unit = $request->unit;
+            $requset_variant->variant = Str::lower($request->variant);
+            $requset_variant->code = $request->code;
+            $requset_variant->is_published = false;
+            $requset_variant->save();
+
+            /*variant of size*/
+            $requset_product_variant = new ProductVariant();
+            $requset_product_variant->product_id = $request->product_id;
+            $requset_product_variant->variant_id = $requset_variant->id;
+            $requset_product_variant->unit = $request->unit;
+            $requset_product_variant->is_published = false;
+            $requset_product_variant->save();
+
+            return back()->with('success',translate('Variation request sent successfully.'));
+        }
