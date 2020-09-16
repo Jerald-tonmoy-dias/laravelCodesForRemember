@@ -481,3 +481,8 @@
 
             return back()->with('success',translate('Variation request sent successfully.'));
         }
+	
+// all file extension rename
+	
+	  //CMD		
+	  ren *.* *.jpg
