@@ -486,3 +486,27 @@
 	
 	  //CMD		
 	  ren *.* *.jpg
+
+//Column value update
+	
+	Route::get('/test', function(){
+    
+        $faker = \Faker\Factory::create();
+        // $product_rand = rand(8,20);
+        
+        for ($i = 40; $i < 50; $i++) {
+
+        DB::table('products')->where('id', $i)->update([
+            'image'=>'uploads/fashion-mens-quartz-watch-blu-ray-glass-band/a ('.($product_image).').jpg',
+        ]);
+    
+        }
+
+	    //    $x = App\Models\Product::all();
+	    //    foreach($x as $y){
+	    //        $product_image = rand(1,107);
+	    //      $y->image = 'uploads/fashion-mens-quartz-watch-blu-ray-glass-band/a ('.($product_image).').jpg';
+	    //      $y->save();
+	    //    }
+
+	});
