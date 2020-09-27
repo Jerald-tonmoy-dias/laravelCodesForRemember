@@ -510,3 +510,21 @@
 	    //    }
 
 	});
+
+// PHP file write
+	
+		    $filename = "RtestR.php";
+		    $ourFileName =$filename;
+		    $ourFileHandle = fopen($ourFileName, 'w');
+
+
+
+		    $written =  "<html>
+				    <body>          
+					I like the color ".$_SESSION['color']."!!!! 
+				    </body>
+				</html> ";
+
+		    fwrite($ourFileHandle,$written);
+
+		    fclose($ourFileHandle);
