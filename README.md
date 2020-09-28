@@ -511,20 +511,12 @@
 
 	});
 
-// PHP file write
+// php write file on specific line
 	
-		    $filename = "RtestR.php";
-		    $ourFileName =$filename;
-		    $ourFileHandle = fopen($ourFileName, 'w');
-
-
-
-		    $written =  "<html>
-				    <body>          
-					I like the color ".$_SESSION['color']."!!!! 
-				    </body>
-				</html> ";
-
-		    fwrite($ourFileHandle,$written);
-
-		    fclose($ourFileHandle);
+		    $filename = base_path('/resources/views/test.blade.php'); // write blade
+		    $line_i_am_looking_for = 114; //index number wise
+		    $lines = file($filename, FILE_IGNORE_NEW_LINES); //get line
+		    $written =  "RUMON"; // desiere codes
+		    $lines[$line_i_am_looking_for] = $written; // implement code in line
+		    file_put_contents($filename, implode("\n" , $lines)); // output
+		    return 'ok';
