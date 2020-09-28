@@ -520,3 +520,11 @@
 		    $lines[$line_i_am_looking_for] = $written; // implement code in line
 		    file_put_contents($filename, implode("\n" , $lines)); // output
 		    return 'ok';
+		    
+// php replace file on specific string
+
+		    $path_to_file = base_path('/resources/views/test.blade.php'); // write blade
+		    $file_contents = file_get_contents($path_to_file); // get file
+		    $file_contents = str_replace("PRINCE","Linkin Park",$file_contents); // find string ('OLD','NEW','WHICH FILE')
+		    file_put_contents($path_to_file,$file_contents); // Replace
+		    return 'ok';
