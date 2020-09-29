@@ -528,3 +528,16 @@
 		    $file_contents = str_replace("PRINCE","Linkin Park",$file_contents); // find string ('OLD','NEW','WHICH FILE')
 		    file_put_contents($path_to_file,$file_contents); // Replace
 		    return 'ok';
+		    
+// Create Model, DB table and migrate
+		
+		Route::get('/migrate', function(){
+		    if (!Schema::hasTable('addons')) {
+			    \Artisan::call('make:model Addon -m');
+			    \Artisan::call('migrate');
+			    \Artisan::call('optimize:clear');
+			    return 'ok';
+			}else{
+			    return 'exist';
+			}
+		});
