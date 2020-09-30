@@ -541,3 +541,7 @@
 			    return 'exist';
 			}
 		});
+		
+//check DB table for migration and Update Column
+
+	DB::statement("ALTER TABLE `orders` CHANGE payment_type payment_type ENUM('cod','stripe','paypal','paytm')");
