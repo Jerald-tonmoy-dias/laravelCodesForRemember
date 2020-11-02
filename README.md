@@ -2,6 +2,8 @@
 
 //.htaccess
 	
+	//general--------------
+	
 	<IfModule mod_rewrite.c>
 	  RewriteEngine on
 	  RewriteCond %{REQUEST_FILENAME} !-f
@@ -14,6 +16,29 @@
 	  AddHandler application/x-httpd-ea-php72 .php .php7 .phtml
 	</IfModule>
 	# php -- END cPanel-generated handler, do not edit
+	
+	//bluehost------------
+	
+	<IfModule mod_rewrite.c>
+	<IfModule mod_negotiation.c>
+	    Options -MultiViews -Indexes
+	</IfModule>
+
+	RewriteEngine On
+	RewriteBase /
+	# Handle Authorization Header
+	RewriteCond %{HTTP:Authorization} .
+	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+	# Redirect Trailing Slashes If Not A Folder...
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_URI} (.+)/$
+	RewriteRule ^ %1 [L,R=301]
+
+	# Handle Front Controller...
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^ index.php [L]
 
 // Edit
 
