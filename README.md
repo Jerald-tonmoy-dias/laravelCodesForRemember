@@ -570,3 +570,20 @@
 //check DB table for migration and Update Column
 
 	DB::statement("ALTER TABLE `orders` CHANGE payment_type payment_type ENUM('cod','stripe','paypal','paytm')");
+	
+// tag
+
+	//Store
+	$tag = explode(',',$request->tag);
+        $tagC = array();
+        foreach ($tag as $itemt){
+            array_push($tagC,$itemt);
+        }
+        $courses->tag = json_encode($tagC);
+	
+	//Get
+	@foreach (json_decode($post->tags) as $tag)
+		<a href="#">
+	    		{{$tag}}
+		</a>
+	@endforeach
