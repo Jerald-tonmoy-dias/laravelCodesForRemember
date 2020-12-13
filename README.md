@@ -595,3 +595,20 @@
                                                         ->orderByRaw('DATE_FORMAT(created_at, "%m-%d")')
                                                         ->groupBy('monthname')
                                                         ->get();
+
+
+//Get Current Month Data
+
+	  function sentMailCurrentMonthData()
+	  {
+		return MailLog::whereMonth('created_at', date('m'))
+				->whereYear('created_at', date('Y'))
+				->count();
+	  }
+
+//Get Last Month records
+
+	  function sentMailLastMonthData()
+	  {
+		return MailLog::whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->count();
+	  }
