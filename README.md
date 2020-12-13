@@ -587,3 +587,11 @@
 	    		{{$tag}}
 		</a>
 	@endforeach
+	
+//Get Month Wise Current Year Data
+	
+	MailLog::select(DB::raw("(COUNT(*)) as count"),DB::raw("MONTHNAME(created_at) as monthname"))
+                                                        ->whereYear('created_at', date('Y'))
+                                                        ->orderByRaw('DATE_FORMAT(created_at, "%m-%d")')
+                                                        ->groupBy('monthname')
+                                                        ->get();
