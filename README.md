@@ -630,3 +630,17 @@
 				    ->take(5)
 				    ->get();
   	  }
+
+//Get Weekly Top Records
+	
+	function weeklyTopSenders()
+	{
+	    $last7days = Carbon::now();
+	    $last7days->subDays(7);
+
+	    return BouncedEmail::select('owner_id')
+		    ->groupBy('owner_id')
+		    ->orderByRaw('COUNT(*) DESC')
+		    ->whereDate('created_at', '>=', $last7days)
+		    ->get();
+	 }
