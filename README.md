@@ -612,3 +612,21 @@
 	  {
 		return MailLog::whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->count();
 	  }
+	  
+//Get Top Records
+
+	  function topRecords()
+  	  {
+    		return BouncedEmail::select(DB::raw('COUNT(id) as cnt', 'owner_id'))->groupBy('owner_id')->orderBy('cnt', 'DESC')->first();
+  	  }
+	 
+//Get Top 5 Records
+
+	  function topFiveRecords()
+  	  {
+    		return BouncedEmail::select('owner_id')
+				    ->groupBy('owner_id')
+				    ->orderByRaw('COUNT(*) DESC')
+				    ->take(5)
+				    ->get();
+  	  }
