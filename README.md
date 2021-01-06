@@ -644,3 +644,15 @@
 		    ->whereDate('created_at', '>=', $last7days)
 		    ->get();
 	 }
+
+// EVEN ODD ADD CLASS, REMOVE CLASS AT LAST LOOP
+
+	@if (!$loop->last)
+
+		@if ($loop->iteration % 2 == 0 ? 'flex-row-reverse' : null)
+			<img class="img-fluid" src="{{ asset('frontend/images/pricing/605.png') }}" alt="img">
+		@else
+			<img class="img-fluid" src="{{ asset('frontend/images/pricing/603.png') }}" alt="img">
+		@endif
+
+	@endif
