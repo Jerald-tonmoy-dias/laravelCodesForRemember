@@ -675,3 +675,14 @@
 		return "{$minutes} {$str_minutes}, {$seconds} {$str_seconds}";
 	    }
 	}
+	
+#Breadcrumb
+
+	@for($i = 1; $i <= count(Request::segments()); $i++)
+	    @if($i < count(Request::segments()) & $i > 0)
+	    <?php $link .= "/" . Request::segment($i); ?>
+	    <a class="breadcrumb--active" href="<?= $link ?>">{{ ucwords(str_replace('-',' ',Request::segment($i)))}}</a> 
+	    <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+	    @else {{ucwords(str_replace('-',' ',Request::segment($i)))}}
+	    @endif
+	@endfor
