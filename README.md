@@ -725,3 +725,31 @@
                 fputcsv($output, $row);  
             }  
             fclose($output);
+
+#Import from CSV to SQL
+
+	if ($request->hasFile('csv')) {
+            $imageName = Auth::user()->id.'.'.$request->csv->getClientOriginalExtension();
+            $request->csv->move(public_path('/uploads/csv'), $imageName);
+
+            $file = asset('uploads/csv/' . Auth::user()->id . '.csv');
+            $contacts = convert_csv_to_json($file);
+
+            
+            foreach (json_decode($contacts) as $value) {
+                $email = new EmailContact;
+                $email->owner_id = Auth::user()->id;
+                $email->name = $value->name ?? null;
+                $email->email = $value->email ?? null;
+                $email->country_code = $value->country_code ?? null;
+                $email->phone = $value->phone ?? null;
+                $email->favourites = $value->favourites ?? null;
+                $email->blocked = $value->blocked ?? null;
+                $email->trashed = $value->trashed ?? null;
+                $email->is_subscribed = $value->is_subscribed ?? null;
+                $email->deleted_at = Carbon::parse($value->created_at) ?? null;
+                $email->created_at = Carbon::parse($value->created_at) ?? Carbon::now();
+                $email->updated_at = Carbon::parse($value->updated_at) ?? Carbon::now();
+                $email->save();
+            }
+        }
