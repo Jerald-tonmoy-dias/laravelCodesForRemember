@@ -710,3 +710,18 @@
 	    @else {{ucwords(str_replace('-',' ',Request::segment($i)))}}
 	    @endif
 	@endfor
+	
+#Export from SQL as CSV
+
+	    $connect = mysqli_connect("localhost", "root", "", "codecanyon_maildoll");  
+            header('Content-Type: text/csv; charset=utf-8');  
+            header('Content-Disposition: attachment; filename=data.csv');  
+            $output = fopen("php://output", "w");  
+            fputcsv($output, array('id', 'owner_id', 'name', 'email', 'country_code', 'phone', 'favourites', 'blocked', 'trashed', 'is_subscribed', 'deleted_at', 'created_at', 	    'updated_at'));  
+            $query = "SELECT * from email_contacts ORDER BY id DESC";  
+            $result = mysqli_query($connect, $query);  
+            while($row = mysqli_fetch_assoc($result))  
+            {  
+                fputcsv($output, $row);  
+            }  
+            fclose($output);
