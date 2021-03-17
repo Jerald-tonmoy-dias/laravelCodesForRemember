@@ -753,3 +753,7 @@
                 $email->save();
             }
         }
+
+#Migrate specific path
+
+	php artisan migrate --path=database/migrations/tenant
