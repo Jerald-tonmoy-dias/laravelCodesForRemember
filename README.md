@@ -757,3 +757,15 @@
 #Migrate specific path
 
 	php artisan migrate --path=database/migrations/tenant
+
+#Demo Middleware
+
+ 	if (env('APP_ENV') == 'local'){
+            if ($request->isMethod('post')) {
+                return back()->with('info', translate('this is for demo purpose only'));
+            } else {
+                return $next($request);
+            }
+        }else{
+            return $next($request);
+        }
