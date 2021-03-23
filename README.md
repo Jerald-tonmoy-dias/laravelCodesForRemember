@@ -769,3 +769,19 @@
         }else{
             return $next($request);
         }
+	
+#Send user alert before deadline
+	
+	function expirationNotify($owner_id, $days)
+         {
+            $expirationNotify = EmailSMSLimitRate::where('owner_id', $owner_id)
+                                ->whereBetween('to', [Carbon::now(), Carbon::now()->addDays($days)])
+                                ->first();
+
+            if ($expirationNotify != null) {
+                return true;
+            } else {
+                return false;
+            }
+            
+         }
