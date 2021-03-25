@@ -785,3 +785,25 @@
             }
             
          }
+
+#Create new database from laravel
+
+	public function createDatabase($dbName)
+        {
+            //Create a new DB with the company db_name attribute
+
+            $new_db = DB::statement("CREATE DATABASE {$dbName}" );
+
+            //Now migrate over all Company specific migrations
+
+            if($new_db)
+            {
+                \Config::set('database.connections.company.database', $dbName);
+
+                return Artisan::call( 'migrate', [
+                    '--database' => 'company',
+                    '--path' => 'database/migrations/company',
+                ]);
+            }
+
+        }
