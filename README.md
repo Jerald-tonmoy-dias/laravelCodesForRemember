@@ -786,7 +786,7 @@
             
          }
 
-#Create new database from laravel
+#Create new database from controller
 
 	public function createDatabase($dbName)
         {
@@ -807,3 +807,22 @@
             }
 
         }
+	
+#Create new database with All Privileged
+
+	Route::get('/db', function () {
+
+	  $new_db = DB::statement('CREATE DATABASE `aqeel`');
+		DB::statement("CREATE USER 'aqeel_root'@'localhost' IDENTIFIED BY 'aqeelroot' ");
+		DB::statement("GRANT ALL PRIVILEGES ON * . * TO 'aqeel_root'@'localhost'");
+
+		if ($new_db) {
+
+		    $config['database'] = env('DB_DATABASE', 'kola');
+		    $config['username'] = env('DB_USERNAME', 'root');
+		    $config['password'] = env('DB_PASSWORD', '');
+		}
+
+	    return 'ok';
+
+	});
