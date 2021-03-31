@@ -826,3 +826,7 @@
 	    return 'ok';
 
 	});
+	
+#Get subdomain from URL
+
+	$subdomain = join('.', explode('.', $_SERVER['HTTP_HOST'], -2))
