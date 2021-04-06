@@ -834,3 +834,17 @@
 #Database Table Count
 
 	return $tables = DB::select('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = "test"');
+	
+#Get Data From Square Brackets
+
+	[
+	  {
+	    "kola": 4
+	  }
+	]
+	
+	$object = str_replace(array('[', ']'), '', htmlspecialchars(json_encode($tables), ENT_NOQUOTES));
+
+	foreach (json_decode($object) as $value) {
+	   return $value;
+	}
