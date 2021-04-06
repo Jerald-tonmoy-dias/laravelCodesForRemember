@@ -843,8 +843,13 @@
 	  }
 	]
 	
-	$object = str_replace(array('[', ']'), '', htmlspecialchars(json_encode($tables), ENT_NOQUOTES));
-
-	foreach (json_decode($object) as $value) {
-	   return $value;
-	}
+	$tables = DB::select('SELECT COUNT(*) AS kola FROM information_schema.tables WHERE table_schema = "'. env('DB_DATABASE') .'"');
+        $object = str_replace(array('[', ']'), '', htmlspecialchars(json_encode($tables), ENT_NOQUOTES));
+    
+        $countDB = null;
+    
+        foreach (json_decode($object) as $value) {
+            $countDB .= $value;
+        }
+    
+        return $countDB;
