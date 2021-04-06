@@ -830,3 +830,7 @@
 #Get subdomain from URL
 
 	$subdomain = join('.', explode('.', $_SERVER['HTTP_HOST'], -2))
+	
+#Database Table Count
+
+	return $tables = DB::select('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = "test"');
