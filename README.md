@@ -853,3 +853,10 @@
         }
     
         return $countDB;
+	
+#SoftDelete via Db Connection
+
+	DB::connection('tenantsql')
+	    ->table('domains')
+	    ->where('tenant_id', $tenant_id)
+	    ->update(['deleted_at' => Carbon::now()]);
