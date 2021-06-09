@@ -890,3 +890,9 @@
 
 	    return implode('', $rand);
 	}
+	
+#GET WITH DATA WHETE CLAUSE
+
+	App\Models\OrderProduct::whereHas('order', function($q) use ($zone_id){
+	   $q->where('division_id', $zone_id);
+	})->count();
