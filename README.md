@@ -896,3 +896,12 @@
 	App\Models\OrderProduct::whereHas('order', function($q) use ($zone_id){
 	   $q->where('division_id', $zone_id);
 	})->count();
+	
+# update multiple row with same ID
+
+	MenuCategory::whereIn('category_id', [$id])
+				->update([
+				    'label' =>  $category->name,
+				    'category_name' =>  $category->name,
+				]);
+
