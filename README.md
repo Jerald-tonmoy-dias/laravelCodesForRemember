@@ -905,3 +905,21 @@
 				    'category_name' =>  $category->name,
 				]);
 
+# categories relationship array string ["1","2"]
+
+	function getCategoryProducts()
+	{
+	    $categoryWithProducts = collect();
+	    $categories = Category::all();
+
+	    foreach($categories as $category){
+		$demo = new Demo;
+		$id = '%' .'"'. $category->id .'"' . '%';
+		$products = Product::orderBy('name')->where('category', 'like', $id)->get();
+		$demo->categories = $category;
+		$demo->products = $products;
+		$categoryWithProducts->push($demo);
+	    }
+
+	    return $categoryWithProducts;
+	}
