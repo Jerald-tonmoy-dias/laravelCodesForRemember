@@ -40,6 +40,13 @@
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^ index.php [L]
 	
+// protect env
+
+	<Files ~ "\.(env|json|config.js|md|xml|gitignore|gitattributes|lock|editorconfig|yml|styleci.yml)$">
+	     Order allow,deny
+	     Deny from all
+	 </Files>
+	
 // localhost & Serve .htaccess
 
 	<IfModule mod_rewrite.c>
