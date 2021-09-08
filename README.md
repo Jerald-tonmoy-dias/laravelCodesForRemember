@@ -972,8 +972,8 @@
                             }])
                             ->first();
         
-        if ($check == null) {
+	if ($check->assigned_role != null) {
             return $next($request);
         }else{
-            return redirect()->route('support.ticket.new');
+            return redirect()->route('support.ticket.new')->withErrors(['You are not allowed to access this ticket']);
         }
