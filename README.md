@@ -963,3 +963,17 @@
 	4. Copy all your database folders that are in mysql/data_old to mysql/data (skipping the mysql, performance_schema, and phpmyadmin folders from data_old)
 	5. Finally copy the ibdata1 file from mysql/data_old and replace it inside mysql/data folder
 	Start MySQL from XAMPP control panel
+	
+#PASS ROUTE PARAMETER TO MIDDLEWARE
+	
+	$check = SupportTicket::where('ticket_no', $request->route('ticket_no'))
+                            ->with(['assigned_role' => function($query){
+                                $query->where('user_id', Auth::id());
+                            }])
+                            ->first();
+        
+        if ($check == null) {
+            return $next($request);
+        }else{
+            return redirect()->route('support.ticket.new');
+        }
