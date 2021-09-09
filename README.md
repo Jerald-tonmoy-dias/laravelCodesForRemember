@@ -977,3 +977,39 @@
         }else{
             return redirect()->route('support.ticket.new')->withErrors(['You are not allowed to access this ticket']);
         }
+	
+# Mark as read/important AJAX
+	
+	// blade
+	<i class="{{ $inbox->important == 1 ? 'like' : '' }} markAsImp" data-id="{{ $inbox->id }}" data-feather="star"></i>
+	<input type="hidden" id="important_url" value="{{ route('support.ticket.mark.star') }}">
+	
+	// script
+	$('.markAsImp ').on('click', function(e) {
+	    var id = $(this).attr('data-id');
+	    var important_url = $('#important_url').val();
+
+	    $.ajax({
+		url: important_url,
+		type: 'GET',
+		data: {
+		    id: id
+		},
+		success: function (data) {
+		    console.log(data);
+		}
+		});
+	    });
+	    
+	// Controller
+	$important = SupportTicket::where('id', $request->id)->first()->important;
+
+	if($important == 0){
+	    $mark_as_read = SupportTicket::where('id', $request->id)->update(['important' => 1]);
+	}else{
+	    $mark_as_read = SupportTicket::where('id', $request->id)->update(['important' => 0]);
+	}
+
+	return response()->json(['message'=> "Marked as important"]);
+	
+	
