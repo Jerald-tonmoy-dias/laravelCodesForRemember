@@ -626,6 +626,16 @@
                                                         ->orderByRaw('DATE_FORMAT(created_at, "%m-%d")')
                                                         ->groupBy('monthname')
                                                         ->get();
+							
+	Or,
+
+	SupportTicket::selectRaw("count(id) AS data, 
+					DATE_FORMAT(created_at, '%m') AS new_date, 
+					YEAR(created_at) AS year, 
+					MONTH(created_at) AS month
+				    ")
+				    ->groupBy('new_date')
+				    ->get();
 
 
 //Get Current Month Data
