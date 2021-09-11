@@ -1011,5 +1011,12 @@
 	}
 
 	return response()->json(['message'=> "Marked as important"]);
+
+# Show onyl if relationship has value
 	
+	SupportTicket::where('user_id', Auth::user()->id)
+                                ->with('replies')
+                                ->has('replies')
+                                ->latest()
+                                ->paginate(10);
 	
