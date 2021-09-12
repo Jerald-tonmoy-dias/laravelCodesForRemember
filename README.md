@@ -1030,3 +1030,10 @@
                                 ->latest()
                                 ->paginate(10);
 	
+# calculate total completion percentage of totalAssigned and totalSolved
+
+	$totalAssigned = 8;
+        $totalSolved = 3;
+
+        $percentage = (3 / 8) * 100;
+        return round($percentage);
