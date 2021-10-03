@@ -1065,6 +1065,7 @@
 	
 # write existing config or language php file
 	
+	// write_arr_to_file
 	function write_arr_to_file($arr, $path){
 	    $data = '';
 	    foreach ($arr as $key => $value) {
@@ -1075,3 +1076,45 @@
 	    return file_put_contents($path, "<?php  \nreturn [".$data."];");
 	}
 	
+	// write_to_lang_category_file
+	function write_to_lang_category_file($name)
+	{
+	    $langs = App\Models\Language::all();
+
+	    foreach ($langs as $lang) {
+
+		$path = base_path('resources/lang/'. $lang->code .'/categories.php');
+
+		if (File::exists($path)) {
+		    // Read array from file
+		    $my_arr = trans('categories');
+
+		    $my_arr[$name] = $name;
+
+		    write_arr_to_file($my_arr, $path);
+		}
+	    }
+	}
+	
+# check if config and language file is exists and create new file with data from database
+
+	 function check_lang_file_exists($code, $file)
+	 {
+	     $path = base_path('resources/lang/'. $code .'/'. $file .'.php');
+
+	     if (!File::exists($path)) {
+		$categories = \DB::table($file)->get('name');
+
+		$datas = collect();
+
+		foreach ($categories as $category) {
+
+		    $obj = new Demo;
+		    $obj->key = $category->name;
+		    $obj->value = $category->name;
+		    $datas->push($obj);
+		}
+
+		mTranslate($datas, $code, $file);
+	     }
+	 }
