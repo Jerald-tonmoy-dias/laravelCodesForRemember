@@ -1063,3 +1063,15 @@
 
 	}
 	
+# write existing config or language php file
+	
+	function write_arr_to_file($arr, $path){
+	    $data = '';
+	    foreach ($arr as $key => $value) {
+		$data = $data . '"' . $key. '"=>"' . $value . '",' ."\n";
+	    }
+
+	    // file_put_contents($path, $data);
+	    return file_put_contents($path, "<?php  \nreturn [".$data."];");
+	}
+	
