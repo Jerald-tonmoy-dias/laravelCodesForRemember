@@ -1037,3 +1037,29 @@
 
         $percentage = (3 / 8) * 100;
         return round($percentage);
+	
+# create and write language php file
+
+	function mTranslate($values, $lang, $type)
+	{
+	    $langPath = base_path().'/resources/lang/' .$lang;
+
+	    if (!File::exists($langPath)) {
+		File::makeDirectory($langPath,0775,true);
+		fopen($langPath . $type .'.php', "x");
+	    }
+
+	    $path = base_path().'/resources/lang/' .$lang. '/'. $type .'.php';
+	    $content = "<?php\n\nreturn\n[\n";
+
+	    foreach ($values as $key => $value) 
+	    {
+		$content .= '"'.$value->key.'" => "'.$value->value.'",' ."\n";
+	    }
+
+	    $content .= '];';
+
+	    file_put_contents($path, $content);
+
+	}
+	
