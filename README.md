@@ -908,7 +908,7 @@
 	    return implode('', $rand);
 	}
 	
-#GET WITH DATA WHETE CLAUSE
+#GET WITH DATA WHERE CLAUSE
 
 	App\Models\OrderProduct::whereHas('order', function($q) use ($zone_id){
 	   $q->where('division_id', $zone_id);
@@ -1118,3 +1118,7 @@
 		mTranslate($datas, $code, $file);
 	     }
 	 }
+	 
+# Query with nested relationship
+
+	Event::with('city.companies.persons')->get();
