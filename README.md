@@ -1122,3 +1122,17 @@
 # Query with nested relationship
 
 	Event::with('city.companies.persons')->get();
+	
+# Laravel Slot Component
+
+	<x-course-card>
+	    <x-slot name="level">Beginner</x-slot>
+	    <x-slot name="thumb">{{ asset('new_assets/images/c1.png') }}</x-slot>
+	    <x-slot name="title">User Experience Design - Adobe XD UI UX Design</x-slot>
+	</x-course-card>
+	
+	<div>
+	    {{ $level }}
+	    <img src="{{ $thumb }}" alt="img" class="img-item mb-40">
+	    {{ $title }}
+	</div>
