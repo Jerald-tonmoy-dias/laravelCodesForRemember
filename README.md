@@ -1144,3 +1144,6 @@
 	Schema::table('users', function (Blueprint $table) {
             $table->string('device_token')->nullable();
         });
+	
+	// in one command
+	php artisan make:migration add_column_in_users --table=users
