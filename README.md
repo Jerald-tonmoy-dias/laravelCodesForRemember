@@ -1136,3 +1136,11 @@
 	    <img src="{{ $thumb }}" alt="img" class="img-item mb-40">
 	    {{ $title }}
 	</div>
+	
+# add a new column in production database table
+
+	php artisan make:migration add_column_in_users
+	
+	Schema::table('users', function (Blueprint $table) {
+            $table->string('device_token')->nullable();
+        });
