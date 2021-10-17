@@ -1147,3 +1147,9 @@
 	
 	// in one command
 	php artisan make:migration add_column_in_users --table=users
+	
+# make space before capital letter
+	function makeSpaceBeforeCapitalLetter($string)
+	{
+	    return preg_replace('/(?<!\ )[A-Z]/', ' $0', $string);
+	}
