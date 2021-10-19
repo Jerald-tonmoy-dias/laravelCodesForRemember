@@ -1153,3 +1153,7 @@
 	{
 	    return preg_replace('/(?<!\ )[A-Z]/', ' $0', $string);
 	}
+	
+# Delete file after download
+
+	return response()->download($file_path)->deleteFileAfterSend(true);
