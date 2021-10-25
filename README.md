@@ -1157,3 +1157,17 @@
 # Delete file after download
 
 	return response()->download($file_path)->deleteFileAfterSend(true);
+
+# Group by with where clause
+
+	$groupedCampaign = EmailTracker::where('campaign_id', $campaign_id)
+            ->groupBy('campaign_id')
+            ->get();
+
+        $dataSend = '';
+
+        foreach ($groupedCampaign as $value) {
+            $dataSend .= $value->sum('total_clicks');
+        }
+
+        return $dataSend;
