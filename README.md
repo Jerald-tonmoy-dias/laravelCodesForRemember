@@ -1171,3 +1171,6 @@
         }
 
         return $dataSend;
+	
+# Run composer with the --ignore-platform-reqs option and specify pcntl and posix
+	composer install --ignore-platform-reqs
