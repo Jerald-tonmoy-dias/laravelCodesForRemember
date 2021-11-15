@@ -1174,3 +1174,19 @@
 	
 # Run composer with the --ignore-platform-reqs option and specify pcntl and posix
 	composer install --ignore-platform-reqs
+	
+# enable One, disable All
+
+	$page = EditorJs::where('project_id', $project_id)
+                                  ->where('id', $page_id)
+                                  ->first();
+        $page->home = 1;
+        $page->save();
+
+        $pages = EditorJs::where('project_id', $project_id)
+                                  ->where('id', '!=', $page_id)
+                                  ->get();
+        foreach ($pages as $page) {
+            $page->home = 0;
+            $page->save();
+        }
