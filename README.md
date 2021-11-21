@@ -1190,3 +1190,10 @@
             $page->home = 0;
             $page->save();
         }
+	
+# Create folder with permission
+
+	$path=base_path('public/uploads/tickets/' . $ticket_no->ticket_no . '/');
+	if (!File::exists($path)) {
+	    File::makeDirectory($path,0775,true);
+	}
