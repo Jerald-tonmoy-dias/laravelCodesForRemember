@@ -1197,3 +1197,23 @@
 	if (!File::exists($path)) {
 	    File::makeDirectory($path,0775,true);
 	}
+	
+# Unique Collection Array Merge
+
+	This is fairly simple. You can use the Collection's merge method:
+
+	$available_roles = $global_roles->merge($user_roles);
+	
+	Because merge internally uses an associative array (dictionary) that uses the id as key, this should automatically remove duplicates.
+
+	Anyways though, you can remove duplicates in a collection using unique:
+
+	$uniqueCollection = $collection->unique();
+	
+	Now that was for merging what you're actually are looking for is the difference between two collections. You can do this in two ways:
+
+	$available_roles = $user_roles->diff($global_roles);
+
+	or
+
+	$available_roles = $global_roles->except($user_roles->modelKeys());
