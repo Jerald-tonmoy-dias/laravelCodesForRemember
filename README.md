@@ -1217,3 +1217,6 @@
 	or
 
 	$available_roles = $global_roles->except($user_roles->modelKeys());
+	
+# Table editable
+	ALTER TABLE  blog MODIFY COLUMN id BIGINT NOT NULL AUTO_INCREMENT primary key
