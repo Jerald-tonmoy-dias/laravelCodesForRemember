@@ -1220,3 +1220,17 @@
 	
 # Table editable
 	ALTER TABLE  blog MODIFY COLUMN id BIGINT NOT NULL AUTO_INCREMENT primary key
+	
+# change all status except ONE
+
+	$currencies = SystemCurrency::get();
+
+        foreach ($currencies as $currency) {
+            if ($currency->code == $code) {
+                $currency->default = 1;
+                $currency->save();
+            }else{
+                $currency->default = 0;
+                $currency->save();
+            }
+        }
