@@ -1234,3 +1234,23 @@
                 $currency->save();
             }
         }
+
+# Strictly find from file
+
+	#app_install
+	$2a$12$CYM.Zcj5aRo2uDK1SYSaVu8v7f1W33p49xLkPt3Xhr5/78dCw0zGm
+	mprince2k16@gmail.com
+	mprince
+	qwerty-qwerty-qwerty-qwerty
+	abc.xom
+
+	#php
+	$search = "mprince";
+	$string = file_get_contents("app_install");
+	$string = explode("\n", $string); // \n is the character for a line break
+	
+	if(in_array($search, $string)){
+	   echo $search . " is in app_install";
+	} else {
+	   echo $search . " is not in app_install";
+	}
