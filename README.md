@@ -1254,3 +1254,16 @@
 	} else {
 	   echo $search . " is not in app_install";
 	}
+	
+# Masking value
+
+	function mask_email($email, $masks = 5) {
+	    $array = explode("@", $email);
+	    $string_length = strlen($array[0]);
+	    if ($string_length < $masks)
+		$masks = $string_length;
+	    $result = substr($array[0], 0, -$masks) . str_repeat('*', $masks);
+	    return $result."@".$array[1];
+	}
+	
+	echo mask_email("longeremail@test.com", 2); // Output: longerema**@test.com
