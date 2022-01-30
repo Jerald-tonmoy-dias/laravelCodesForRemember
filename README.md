@@ -43,6 +43,11 @@
 // protect env
 
 	<Files ~ "\.(env|json|config.js|md|xml|gitignore|gitattributes|lock|editorconfig|yml|styleci.yml)$">
+     		Order allow,deny
+     		Deny from all
+	 </Files>
+	 Options -Indexes
+	 <Files ~ "(artisan|package.json|webpack.mix.js)$">
 	     Order allow,deny
 	     Deny from all
 	 </Files>
