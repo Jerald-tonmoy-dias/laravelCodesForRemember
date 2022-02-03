@@ -1291,3 +1291,7 @@
 	    $domainName = $_SERVER['HTTP_HOST'];
 	    return $protocol . $domainName;
 	}
+	
+# Alter primary key
+	
+	ALTER TABLE `ecom_orders` MODIFY `id` INT, ADD PRIMARY KEY (id);
