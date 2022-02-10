@@ -1295,3 +1295,42 @@
 # Alter primary key
 	
 	ALTER TABLE `ecom_orders` MODIFY `id` INT, ADD PRIMARY KEY (id);
+	
+# Manupulating ['name:10', 'name:10']
+
+	$properties = ['name:10', 'name:10'];
+
+        $collection = collect();
+
+        // foreach loop to get the property name and price
+        foreach ($properties as $property) {
+            $property_name = explode(':', $property)[0];
+            $property_price = explode(':', $property)[1];
+            $property_name_array[] = $property_name;
+            $property_price_array[] = $property_price;
+
+            $collection->push([
+                'property_name' => $property_name,
+                'property_price' => $property_price
+            ]);
+        }
+
+        // store the properties in the cart
+        $check_cart = Cart::where('user_id', 100)
+                            ->where('food_id', $request->food_id)
+                            ->where('domain', $request->domain)
+                            ->first();
+        
+        $check_cart->properties_name = $property_name_array ?? null;
+        $check_cart->properties_price = $property_price_array ?? null;
+
+        // calculate the sum with the properties price
+        $sum = 0;
+        foreach ($collection as $property) {
+            $sum = $sum + $property['property_price'];
+        }
+
+        // calculate total some with the sum
+
+        $check_cart->sum = ($check_cart->food_price + $check_cart->variation_price + $sum) * $check_cart->quantity;
+        $check_cart->save();
