@@ -1339,6 +1339,7 @@
 
 	http://codepickup.in/server/deploy-laravel-application-on-ubuntu-server/
 	https://youtu.be/J8sdi-JtTlE
+	https://tecadmin.net/how-to-install-php-8-on-ubuntu-20-04/
 	
 	sudo apt-get update
 	sudo apt-get upgrade
