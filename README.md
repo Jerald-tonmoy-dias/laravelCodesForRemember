@@ -1334,3 +1334,12 @@
 
         $check_cart->sum = ($check_cart->food_price + $check_cart->variation_price + $sum) * $check_cart->quantity;
         $check_cart->save();
+	
+# AWS deploy
+
+	http://codepickup.in/server/deploy-laravel-application-on-ubuntu-server/
+	https://youtu.be/J8sdi-JtTlE
+	
+	// permission issue
+	sudo chown -R ubuntu /var/www/html
+	sudo chmod -R 755 /var/www/html
