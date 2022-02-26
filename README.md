@@ -1340,6 +1340,12 @@
 	http://codepickup.in/server/deploy-laravel-application-on-ubuntu-server/
 	https://youtu.be/J8sdi-JtTlE
 	
+	sudo apt-get update
+	sudo apt-get upgrade
+	sudo apt install zip unzip
+	sudo apt install apache2
+	sudo service apache2 restart
+	
 	// permission issue
 	sudo chown -R ubuntu /var/www/html
 	sudo chmod -R 755 /var/www/html
