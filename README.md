@@ -1,6 +1,6 @@
 # laravelCodesForRemember
 
-//.htaccess
+# .htaccess
 	
 	//general--------------
 	
@@ -39,6 +39,33 @@
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^ index.php [L]
+	
+# Plesk
+
+	<IfModule mod_rewrite.c>
+	    <IfModule mod_negotiation.c>
+		Options -MultiViews -Indexes
+	    </IfModule>
+
+	    RewriteEngine On
+	    RewriteBase /
+	    RewriteCond %{REQUEST_FILENAME} !-f
+	    RewriteRule ^(.*)$ public/index.php?$1 [L,QSA]
+
+	    # Handle Authorization Header
+	    RewriteCond %{HTTP:Authorization} .
+	    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+	    # Redirect Trailing Slashes If Not A Folder...
+	    RewriteCond %{REQUEST_FILENAME} !-d
+	    RewriteCond %{REQUEST_URI} (.+)/$
+	    RewriteRule ^ %1 [L,R=301]
+
+	    # Send Requests To Front Controller...
+	    RewriteCond %{REQUEST_FILENAME} !-d
+	    RewriteCond %{REQUEST_FILENAME} !-f
+	    RewriteRule ^ index.php [L]
+	</IfModule>
 	
 // protect env
 
