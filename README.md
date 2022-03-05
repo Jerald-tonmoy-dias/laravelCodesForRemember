@@ -1377,3 +1377,19 @@
 	// permission issue
 	sudo chown -R ubuntu /var/www/html
 	sudo chmod -R 755 /var/www/html
+	
+# NEXT & PREVIOUS ITEM
+	
+	// next
+	function next($product_id)
+	{
+	  $next = Product::where('id', '>', $product_id)->first();
+	  return $next;
+	}
+
+	// previous
+	function previous($product_id)
+	{
+	  $previous = Product::where('id', '<', $product_id)->first();
+	  return $previous;
+	}
