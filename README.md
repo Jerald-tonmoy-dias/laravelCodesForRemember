@@ -1402,6 +1402,7 @@
 	$string = str_replace(array('[',']'),'',$ids);
 	$newString = preg_replace('/"/i', '', $string);
 	return $newString;
+	
 	Sample 2:
 
 	function removeThirdBrackets($string)
