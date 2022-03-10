@@ -1393,3 +1393,24 @@
 	  $previous = Product::where('id', '<', $product_id)->first();
 	  return $previous;
 	}
+	
+# Remove third brackets and double quotes from array string
+
+	Sample 1:
+
+	$ids = ["1002","1006","1005","1003","1004"];
+	$string = str_replace(array('[',']'),'',$ids);
+	$newString = preg_replace('/"/i', '', $string);
+	return $newString;
+	Sample 2:
+
+	function removeThirdBrackets($string)
+	 {
+	    $string = str_replace('[', '', $string);
+	    $string = str_replace(']', '', $string);
+	    $string = str_replace('"', '', $string);
+	    return $string;
+	 }
+	Output:
+
+	1002,1006,1005,1003,1004
