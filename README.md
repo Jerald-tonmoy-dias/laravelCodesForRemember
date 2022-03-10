@@ -1412,6 +1412,7 @@
 	    $string = str_replace('"', '', $string);
 	    return $string;
 	 }
+	 
 	Output:
 
 	1002,1006,1005,1003,1004
