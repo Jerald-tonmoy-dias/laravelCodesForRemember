@@ -1416,3 +1416,38 @@
 	Output:
 
 	1002,1006,1005,1003,1004
+	
+# Split CSV by row size
+
+	$outputFile = 'indiacountry-part-';
+        $splitSize = 500; // 500 records in a one file
+        $in = fopen(base_path('usa_email_csvs.csv'), 'r');
+
+        $rows = 0;
+        $fileCount = 1;
+        $out = null;
+
+        while (!feof($in)) {
+            if (($rows % $splitSize) == 0) {
+                if ($rows > 0) {
+                    fclose($out);
+                }
+
+                $fileCount++;
+
+                // for filenames like indiacountry-part-0001.csv, indiacountry-part-0002.csv etc
+                $fileCounterDisplay = sprintf("%04d", $fileCount);
+
+                $fileName = "$outputFile$fileCounterDisplay.csv";
+                $out = fopen($fileName, 'w');
+            }
+
+            $data = fgetcsv($in);
+
+            if ($data)
+                fputcsv($out, $data);
+
+            $rows++;
+        }
+
+        fclose($out);
