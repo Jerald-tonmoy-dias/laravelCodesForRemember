@@ -670,7 +670,7 @@
 				    ->get();
 
 
-//Get Current Month Data
+# Get Current Month Data
 
 	  function sentMailCurrentMonthData()
 	  {
@@ -679,21 +679,21 @@
 				->count();
 	  }
 
-//Get Last Month records
+# Get Last Month records
 
 	  function sentMailLastMonthData()
 	  {
 		return MailLog::whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->count();
 	  }
 	  
-//Get Top Records
+# Get Top Records
 
 	  function topRecords()
   	  {
     		return BouncedEmail::select(DB::raw('COUNT(id) as cnt', 'owner_id'))->groupBy('owner_id')->orderBy('cnt', 'DESC')->first();
   	  }
 	 
-//Get Top 5 Records
+# Get Top 5 Records
 
 	  function topFiveRecords()
   	  {
@@ -704,7 +704,7 @@
 				    ->get();
   	  }
 
-//Get Weekly Top Records
+# Get Weekly Top Records
 	
 	function weeklyTopSenders()
 	{
@@ -718,7 +718,7 @@
 		    ->get();
 	 }
 
-// EVEN ODD ADD CLASS, REMOVE CLASS AT LAST LOOP
+# EVEN ODD ADD CLASS, REMOVE CLASS AT LAST LOOP
 
 	@if (!$loop->last)
 
@@ -730,7 +730,7 @@
 
 	@endif
 	
-// Estimated Time To Read
+# Estimated Time To Read
 
 	function estimate_reading_time($content) {
 	    $word_count = str_word_count(strip_tags($content));
@@ -749,7 +749,7 @@
 	    }
 	}
 	
-#Breadcrumb
+# Breadcrumb
 
 	@for($i = 1; $i <= count(Request::segments()); $i++)
 	    @if($i < count(Request::segments()) & $i > 0)
@@ -760,7 +760,7 @@
 	    @endif
 	@endfor
 	
-#Export from SQL as CSV
+# Export from SQL as CSV
 
 	    $connect = mysqli_connect("localhost", "root", "", "codecanyon_maildoll");  
             header('Content-Type: text/csv; charset=utf-8');  
@@ -775,7 +775,7 @@
             }  
             fclose($output);
 
-#Import from CSV to SQL
+# Import from CSV to SQL
 
 	if ($request->hasFile('csv')) {
             $imageName = Auth::user()->id.'.'.$request->csv->getClientOriginalExtension();
@@ -803,11 +803,11 @@
             }
         }
 
-#Migrate specific path
+# Migrate specific path
 
 	php artisan migrate --path=database/migrations/tenant
 
-#Demo Middleware
+# Demo Middleware
 
  	if (env('APP_ENV') == 'local'){
             if ($request->isMethod('post')) {
@@ -819,7 +819,7 @@
             return $next($request);
         }
 	
-#Send user alert before deadline
+# Send user alert before deadline
 	
 	function expirationNotify($owner_id, $days)
          {
@@ -835,7 +835,7 @@
             
          }
 
-#Create new database from controller
+# Create new database from controller
 
 	public function createDatabase($dbName)
         {
@@ -857,7 +857,7 @@
 
         }
 	
-#Create new database with All Privileged
+# Create new database with All Privileged
 
 	Route::get('/db', function () {
 
@@ -876,15 +876,15 @@
 
 	});
 	
-#Get subdomain from URL
+# Get subdomain from URL
 
 	$subdomain = join('.', explode('.', $_SERVER['HTTP_HOST'], -2))
 	
-#Database Table Count
+# Database Table Count
 
 	return $tables = DB::select('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = "test"');
 	
-#Get Data From Square Brackets
+# Get Data From Square Brackets
 
 	[
 	  {
@@ -903,14 +903,14 @@
     
         return $countDB;
 	
-#SoftDelete via Db Connection
+# SoftDelete via Db Connection
 
 	DB::connection('tenantsql')
 	    ->table('domains')
 	    ->where('tenant_id', $tenant_id)
 	    ->update(['deleted_at' => Carbon::now()]);
 	    
-#OTP
+# OTP
 
 	function generatePin( $number ) {
 	    // Generate set of alpha characters
@@ -940,7 +940,7 @@
 	    return implode('', $rand);
 	}
 	
-#GET WITH DATA WHERE CLAUSE
+# GET WITH DATA WHERE CLAUSE
 
 	App\Models\OrderProduct::whereHas('order', function($q) use ($zone_id){
 	   $q->where('division_id', $zone_id);
