@@ -79,7 +79,7 @@
 	     Deny from all
 	 </Files>
 	
-// localhost & Serve .htaccess
+# localhost & Serve .htaccess
 
 	<IfModule mod_rewrite.c>
 	 #Session timeout
@@ -103,7 +103,7 @@
 
 	</IfModule>
 
-// Edit
+# Edit
 
 	function edit($user_id)
 	    {
@@ -111,7 +111,7 @@
 	      return view('users.edit',compact('single_data'));
 	    }
 
-//update
+# update
 
 	function update(Request $request)
 	    {
@@ -122,7 +122,7 @@
 	      return back();
 	    }
 	
-//delete
+# delete
 
 	function delete($user_id)
 	    {
@@ -130,7 +130,7 @@
 	      return back();
 	    }
     
-//restore
+# restore
     
     function restore_banner($banner_id)
       {
@@ -139,7 +139,7 @@
     }
     
     
- //alert message
+ # alert message
    
 	   @if (session('success'))
 	   <div class="alert alert-success">
@@ -147,7 +147,7 @@
 	   </div>
 	   @endif
 
- //error
+ # error
 
 	   @if ($errors->any())
 	   <div class="alert alert-danger">
@@ -161,7 +161,7 @@
    
    
    
-   // relationship
+ # relationship
    
 	   function relationbetweencategory()
 	    {
@@ -171,7 +171,7 @@
    
    
    
-   // photo upload
+# photo upload
    
 	   if ($request->hasFile('header_banner')) {
 		$photo_upload     =  $request ->header_banner;
@@ -184,7 +184,7 @@
 	      }
 
 
- // Photo Update
+# Photo Update
  
 	   if($request->hasFile('header_banner')){
 		if(Banner::find($request->banner_id)->header_banner=='default.png'){
@@ -211,7 +211,7 @@
 		}
 	      }
       
-//Ajax
+# Ajax
 
 
 	<script type="text/javascript">
@@ -252,7 +252,7 @@
 
 
 
-//Mailing
+# Mailing
 	
 	public $name ="";
 	public function __construct($name)
@@ -273,7 +273,7 @@
 	
 	
 	
-//photo upload [object]
+# photo upload [object]
   		
 	if($file = $request->hasFile('photo')) {
             $file = $request->file('photo') ;
@@ -283,13 +283,13 @@
             $user->photo = $fileName ;
           }
 
-//photo download
+# photo download
 	
 	$file_name = Requisition::findOrFail($requisition_id)->money_receipt;
 	$path = public_path('uploads/requisition/'.$file_name);
 	return response()->download($path);
 	
-// Get Youtube Video JSON Informarion
+# Get Youtube Video JSON Informarion
 	
 	 $youtube_contains = Str::contains($request->video_url, 'youtu.be');
 	 $vid = Str::after($request->video_url,'https://youtu.be/'); //youtube video id
@@ -329,7 +329,7 @@
             notify()->success(translate('Class Content Save Successfully '));
             return back();
 	    
-// GET vimeo video information JSON
+# GET vimeo video information JSON
 	     
 	     $vimeo_contains = Str::contains($request->video_url, 'vimeo.com');
 	     
@@ -349,7 +349,7 @@
             notify()->success(translate('Class Content Save Successfully '));
             return back();
 	    
-  //git solution
+# git solution
   
   	$ cd ~/.ssh
 	$ ls
@@ -357,7 +357,7 @@
 	//optional
 	$ cat ~/.ssh/id_rsa.pub
 	
- //breadcrumb
+# breadcrumb
  
  	<ul class="breadcrumb__list">
            <li class="active__list-item">Home</li>
@@ -370,7 +370,7 @@
                 @endforeach
          </ul>
    
-   //Publish checkbox(ajax)
+# Publish checkbox(ajax)
    	
 	//blade
 	<input id="radio{{$food->id}}" data-id="{{ $food->id }}" data-url="{{ route('food.publish') }}" class="publish" type="checkbox" {{ $food->is_published == 1 ? 'checked' : '' }}><span class="switch-state bg-primary"></span>
@@ -409,7 +409,7 @@
          return response(['message' => 'Slider status is changed '], 200);
        }
 	
-   //forModal(JS)
+# forModal(JS)
    	
 	//blade
 	<a href="#!" onclick="quickView('{{ route('quick.view',$product->slug) }}')">
@@ -438,7 +438,7 @@
 	   return view('frontend.include.product.quickview');
 	}
 
-//Store Multiple value(json)
+# Store Multiple value(json)
 	
 	//controller
 	$data = explode(',', $request->tags);
@@ -453,7 +453,7 @@
 	//Blade
 	@foreach(json_decode($product->tags) as $data){{$data}},@endforeach
 
-// Search by Array
+# Search by Array
 	
 	public function find_order(Request $request)
     	{
@@ -499,7 +499,7 @@
             return view('backend.orders.search_result', compact('getDatas'));
     	}
 	
-// Product Rating Math
+# Product Rating Math
 
 	    $rates = App\Models\OrderProduct::where('shop_id',$id)->select('review_star')->get()->toArray();
 
@@ -515,7 +515,7 @@
 
             return response()->json(['rating'=>$result],200);
 
-// Limit
+# Limit
 				
 	    @php
                 $category_child_limit = 0;
@@ -540,7 +540,7 @@
 
              @endforeach
 	     
-//Check Exist
+# Check Exist
 	
 	$check_exist = Variant::where('unit',$request->unit)
                               ->where('variant',$request->variant)
@@ -570,12 +570,12 @@
             return back()->with('success',translate('Variation request sent successfully.'));
         }
 	
-// all file extension rename
+# all file extension rename
 	
 	  //CMD		
 	  ren *.* *.jpg
 
-//Column value update
+# Column value update
 	
 	Route::get('/test', function(){
     
@@ -599,7 +599,7 @@
 
 	});
 
-// php write file on specific line
+# php write file on specific line
 	
 		    $filename = base_path('/resources/views/test.blade.php'); // write blade
 		    $line_i_am_looking_for = 114; //index number wise
@@ -609,7 +609,7 @@
 		    file_put_contents($filename, implode("\n" , $lines)); // output
 		    return 'ok';
 		    
-// php replace file on specific string
+# php replace file on specific string
 
 		    $path_to_file = base_path('/resources/views/test.blade.php'); // write blade
 		    $file_contents = file_get_contents($path_to_file); // get file
@@ -617,7 +617,7 @@
 		    file_put_contents($path_to_file,$file_contents); // Replace
 		    return 'ok';
 		    
-// Create Model, DB table and migrate
+# Create Model, DB table and migrate
 		
 		Route::get('/migrate', function(){
 		    if (!Schema::hasTable('addons')) {
@@ -630,11 +630,11 @@
 			}
 		});
 		
-//check DB table for migration and Update Column
+# check DB table for migration and Update Column
 
 	DB::statement("ALTER TABLE `orders` CHANGE payment_type payment_type ENUM('cod','stripe','paypal','paytm')");
 	
-// tag
+# tag
 
 	//Store
 	$tag = explode(',',$request->tag);
@@ -651,7 +651,7 @@
 		</a>
 	@endforeach
 	
-//Get Month Wise Current Year Data
+# Get Month Wise Current Year Data
 	
 	MailLog::select(DB::raw("(COUNT(*)) as count"),DB::raw("MONTHNAME(created_at) as monthname"))
                                                         ->whereYear('created_at', date('Y'))
@@ -1451,3 +1451,13 @@
         }
 
         fclose($out);
+	
+# bytes to MB
+
+	function convertToReadableSize($size)
+	 {
+		$base = log($size) / log(1024);
+		$suffix = array("B", "KB", "MB", "GB", "TB");
+		$f_base = floor($base);
+		return round(pow(1024, $base - floor($base)), 1) . $suffix[$f_base];
+	 }
