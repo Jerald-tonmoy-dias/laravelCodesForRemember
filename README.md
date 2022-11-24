@@ -1,20 +1,5 @@
 # laravelCodesForRemember
 
-# extract zip file to server through php
-
-<?php
-$zip = new ZipArchive;
-// Zip File Name
-if ($zip->open('GeeksforGeeks.zip') === TRUE) {
-	// Unzip Path
-	$zip->extractTo('/Destination/Directory/');
-	$zip->close();
-	echo 'Unzipped Process Successful!';
-} else {
-	echo 'Unzipped Process failed';
-}
-?
-
 # .htaccess
 	
 	//general--------------
